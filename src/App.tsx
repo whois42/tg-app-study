@@ -5,6 +5,7 @@ import WebApp from '@twa-dev/sdk'
 
 function App() {
   const [count, setCount] = useState(0)
+  console.log(WebApp)
 
   return (
     <>
@@ -16,7 +17,7 @@ function App() {
       </div>
       {/*  */}
       <div className="card">
-        <button onClick={() => WebApp.showAlert(`${JSON.stringify(WebApp.initData)}`)}>
+        <button onClick={() => WebApp.showAlert(`AAAA`)}>
             Show Alert
         </button>
       </div>
