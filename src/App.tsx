@@ -2,6 +2,7 @@ import { useState } from 'react'
 import './App.css'
 
 import WebApp from '@twa-dev/sdk'
+import { MainButton, BottomBar } from '@twa-dev/sdk/react';
 
 function App() {
   const [count, setCount] = useState(0)
@@ -15,18 +16,15 @@ function App() {
 
   return (
     <>
-      <h1>TWA + Vite + React</h1>
+      <h1>Open headliner</h1>
       <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
+        <MainButton
+          text="Open headliner"
+          onClick={handleClick}
+        />
       </div>
       {/*  */}
-      <div className="card">
-        <button onClick={handleClick}>
-            Show Alert
-        </button>
-      </div>
+      <BottomBar  bgColor='red'/>
     </>
   )
 }
