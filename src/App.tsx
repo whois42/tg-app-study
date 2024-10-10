@@ -16,7 +16,7 @@ function App() {
       </div>
       {/*  */}
       <div className="card">
-        <button onClick={() => WebApp.showAlert(`${JSON.stringify(WebApp)}`)}>
+        <button onClick={() => WebApp.showAlert(`${JSON.stringify(WebApp.initData)}`)}>
             Show Alert
         </button>
       </div>
