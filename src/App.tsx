@@ -7,6 +7,12 @@ function App() {
   const [count, setCount] = useState(0)
   console.log(WebApp)
 
+  const handleClick = () => {
+    WebApp.showAlert(`AAAA`)
+    console.log(WebApp.initData);
+    
+  }
+
   return (
     <>
       <h1>TWA + Vite + React</h1>
@@ -17,7 +23,7 @@ function App() {
       </div>
       {/*  */}
       <div className="card">
-        <button onClick={() => WebApp.showAlert(`AAAA`)}>
+        <button onClick={handleClick}>
             Show Alert
         </button>
       </div>
