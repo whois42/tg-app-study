@@ -9,7 +9,7 @@ function App() {
 
   const handleClick = () => {
     WebApp.showAlert(`AAAA`)
-    console.log(WebApp.initData);
+    console.log(WebApp.initData, WebApp.initDataUnsafe, 'aaaa');
     
   }
 
