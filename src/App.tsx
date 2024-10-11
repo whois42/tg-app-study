@@ -23,7 +23,7 @@ function App() {
         />
       </div>
       {/*  */}
-      <BottomBar  bgColor='red'/>
+      <BottomBar  bgColor='#4287f5'/>
     </>
   )
 }
