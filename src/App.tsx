@@ -1,12 +1,16 @@
 import './App.css'
 
+import { useEffect } from 'react';
 import WebApp from '@twa-dev/sdk'
 import { MainButton, BottomBar } from '@twa-dev/sdk/react';
 import {ProfileForm} from "./components/ProfileForm";
 
 function App() {
   // const [count, setCount] = useState(0)
-  console.log(WebApp)
+  useEffect(() => {
+    console.log(WebApp);
+    
+  }, [])
 
   const handleClick = () => {
     WebApp.showAlert(`AAAA`)
