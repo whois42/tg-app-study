@@ -1,7 +1,9 @@
-import React from 'react';
 import * as Form from '@radix-ui/react-form';
 
-export const ProfileForm: React.FC = ({user}) => {
+import { WebAppUser } from '@twa-dev/types';
+
+type User = WebAppUser & { added_to_attachment_menu?: boolean; allows_write_to_pm?: boolean } | null
+export const ProfileForm = ({user}:{user: User}) => {
     return user? (
         <div>
             <div>
