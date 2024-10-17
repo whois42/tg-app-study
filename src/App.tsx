@@ -12,7 +12,7 @@ function App() {
   const [user, setUser] = useState<User>(null)
   useEffect(() => {
     if(WebApp.initDataUnsafe.user){
-      console.log(WebApp.initDataUnsafe.user);
+      console.log(WebApp.initDataUnsafe.user.photo_url);
       setUser(WebApp.initDataUnsafe.user)
     }
     
