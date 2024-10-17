@@ -14,7 +14,10 @@ function App() {
 
   const handleClick = () => {
     WebApp.showAlert(`AAAA`)
-    console.log(WebApp.initData, WebApp.initDataUnsafe, 'aaaa');
+    if(WebApp.initDataUnsafe.user){
+      console.log(WebApp.initDataUnsafe.user);
+      
+    }
     
   }
 
