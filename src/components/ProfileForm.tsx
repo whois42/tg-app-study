@@ -32,10 +32,6 @@ export const ProfileForm = ({user}:{user: User}) => {
                     <input type="text" />
                 </Form.Control>
             </Form.Field>
-
-            <Form.Submit asChild>
-                <button type="submit">Submit</button>
-            </Form.Submit>
         </Form.Root>
         </div>
     ): null;
