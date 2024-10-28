@@ -1,7 +1,7 @@
 import './App.css'
 
 import { useEffect, useState } from 'react';
-import {BrowserRouter, Route, Routes} from "react-router-dom";
+// import {BrowserRouter, Route, Routes} from "react-router-dom";
 
 import { WebAppUser } from '@twa-dev/types';
 import WebApp from '@twa-dev/sdk'
@@ -27,6 +27,7 @@ function App() {
   const handleTelegramLogin = async () => {
     if(WebApp.initDataUnsafe.user){
     const telegramData = WebApp.initDataUnsafe || {}; // Use Telegram data
+    setUser(telegramData);
     try {
       await telegramLogin(telegramData);
       // Reload events after login
@@ -37,18 +38,19 @@ function App() {
     }
   }
   };
+  const txt = events.length > 0 ? `You have ${events.length} events` : "No events yet";
 
   return (
     <>
-      <h1>Open headliner</h1>
+      <h1>{txt}</h1>
       <ProfileForm user={user}/>
       <div className="card">
         <MainButton
-          text="Open headliner"
+          text="{events.length}"
           onClick={handleClick}
         />
       </div>
-      {/*  */}
+      
       <BottomBar  bgColor='#4287f5'/>
     </>
   )
