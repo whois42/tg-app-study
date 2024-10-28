@@ -4,6 +4,8 @@ const BASE_URL = 'https://acb8-87-212-202-77.ngrok-free.app';
 
 // Initialize Telegram Login
 export async function telegramLogin(telegramData) {
+  console.log(telegramData);
+  
   try {
     const response = await axios.post(`${BASE_URL}/auth/self`, telegramData);
     if (response.data.access_token) {
