@@ -7,24 +7,36 @@ import { WebAppUser } from '@twa-dev/types';
 import WebApp from '@twa-dev/sdk'
 import { MainButton, BottomBar } from '@twa-dev/sdk/react';
 import {ProfileForm} from "./components/ProfileForm";
+import {telegramLogin} from "./services/auth";
+import {getEvents} from "./services/events";
 
 type User = WebAppUser & { added_to_attachment_menu?: boolean; allows_write_to_pm?: boolean } | null
 
 function App() {
   const [user, setUser] = useState<User>(null)
+  const [events, setEvents] = useState([]);
   useEffect(() => {
-    if(WebApp.initDataUnsafe.user){
-      console.log(WebApp.initDataUnsafe.user.photo_url);
-      setUser(WebApp.initDataUnsafe.user)
-    }
+    handleTelegramLogin()
     
   }, [])
 
   const handleClick = () => {
     WebApp.showAlert(`AAAA`)
-
-    
   }
+
+  const handleTelegramLogin = async () => {
+    if(WebApp.initDataUnsafe.user){
+    const telegramData = WebApp.initDataUnsafe || {}; // Use Telegram data
+    try {
+      await telegramLogin(telegramData);
+      // Reload events after login
+      const events = await getEvents();
+      setEvents(events);
+    } catch (error) {
+      console.error("Telegram login failed:", error);
+    }
+  }
+  };
 
   return (
     <>
