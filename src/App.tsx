@@ -20,10 +20,24 @@ function App() {
     
   }, [])
 
+  const handleClick = () => {
+    WebApp.showAlert(`AAAA`)
+
+    
+  }
 
   return (
     <>
-      
+      <h1>Open headliner</h1>
+      <ProfileForm user={user}/>
+      <div className="card">
+        <MainButton
+          text="Open headliner"
+          onClick={handleClick}
+        />
+      </div>
+      {/*  */}
+      <BottomBar  bgColor='#4287f5'/>
     </>
   )
 }
