@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const BASE_URL = 'http://localhost:8000';
+const BASE_URL = 'https://acb8-87-212-202-77.ngrok-free.app';
 
 // Initialize Telegram Login
 export async function telegramLogin(telegramData) {
