@@ -9,7 +9,7 @@ import { MainButton, BottomBar } from '@twa-dev/sdk/react';
 import {ProfileForm} from "./components/ProfileForm";
 import {telegramLogin} from "./services/auth";
 import {getEvents} from "./services/events";
-import {getSelf} from "./services/user";
+import {getSelf, createUser} from "./services/user";
 
 // type User = WebAppUser & { added_to_attachment_menu?: boolean; allows_write_to_pm?: boolean } | null
 
@@ -32,7 +32,17 @@ function App() {
     try {
       await telegramLogin(telegramData);
       // Reload events after login
-      await getSelf();
+      try {
+        const user = await getSelf();
+        setUser(user);
+      } catch (error) {
+        if (error.response && error.response.status === 404) {
+          // User not found, create a new user
+          createUser(telegramData.user);
+        } else {
+          console.error("Failed to fetch or create user:", error);
+        }
+      }
       const events = await getEvents();
 
       setEvents(events);
