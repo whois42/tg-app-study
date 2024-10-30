@@ -6,7 +6,7 @@ export async function getSelf() {
 }
 
 export async function createUser(userData) {
-    const response = await axiosInstance.post('/users/users/', userData);
+    const response = await axiosInstance.post('/users', userData);
     return response.data;
   }
 
