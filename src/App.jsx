@@ -9,6 +9,7 @@ import { MainButton, BottomBar } from '@twa-dev/sdk/react';
 import {ProfileForm} from "./components/ProfileForm";
 import {telegramLogin} from "./services/auth";
 import {getEvents} from "./services/events";
+import {getSelf} from "./services/user";
 
 // type User = WebAppUser & { added_to_attachment_menu?: boolean; allows_write_to_pm?: boolean } | null
 
@@ -31,7 +32,9 @@ function App() {
     try {
       await telegramLogin(telegramData);
       // Reload events after login
+      await getSelf();
       const events = await getEvents();
+
       setEvents(events);
     } catch (error) {
       console.error("Telegram login failed:", error);
