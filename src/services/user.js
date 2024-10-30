@@ -5,8 +5,15 @@ export async function getSelf() {
   return response.data;
 }
 
-export async function createUser(userData) {
-    const response = await axiosInstance.post('/users', userData);
+export async function createUser(telegramData) {
+    console.log(typeof telegramData)
+    const userData = {
+        username: telegramData.username,
+        first_name: telegramData.first_name,
+        last_name: telegramData.last_name,
+        telegram_id: telegramData.id,
+    }
+    const response = await axiosInstance.post('/users/init/', userData);
     return response.data;
   }
 
