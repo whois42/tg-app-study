@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@radix-ui/react-form": "^0.1.0",
+    "@telegram-apps/telegram-ui": "^2.1.8",
     "@twa-dev/sdk": "^7.10.1",
     "@vitejs/plugin-basic-ssl": "^1.0.1",
     "axios": "^1.7.7",
