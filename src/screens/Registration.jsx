@@ -18,7 +18,7 @@ export const RegistrationForm = ({user}) => {
 
     const handleSubmit = (userData) => {
     console.log(user, "user data");
-      createUser({telegram_id:user.telegram_id, ...userData});
+      createUser({telegram_id:user.id, ...userData});
     }
     return <ProfileForm user={user} onSubmit={handleSubmit}/>
 };
