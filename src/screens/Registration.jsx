@@ -17,8 +17,8 @@ import { ProfileForm } from '../components/ProfileForm';
 export const RegistrationForm = ({user}) => {
 
     const handleSubmit = (userData) => {
-        console.log(userData, "user data");
-      createUser(userData);
+    console.log(user, "user data");
+      createUser({telegram_id:user.telegram_id, ...userData});
     }
     return <ProfileForm user={user} onSubmit={handleSubmit}/>
 };
