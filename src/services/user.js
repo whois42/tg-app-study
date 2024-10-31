@@ -16,7 +16,7 @@ export async function createUser(telegramData) {
     return response.data;
   }
 
-export async function updateSelf(userData) {
+export async function updateUser(userData) {
   const response = await axiosInstance.put('/users/self/', userData);
   return response.data;
 }
