@@ -16,8 +16,8 @@ import { ProfileForm } from '../components/ProfileForm';
 // type User = WebAppUser & { added_to_attachment_menu?: boolean; allows_write_to_pm?: boolean } | null
 export const RegistrationForm = ({user}) => {
 
-    const handleSubmit = async (userData) => {
-        await createUser(userData);
+    const handleSubmit = (userData) => {
+      createUser(userData);
     }
     return <ProfileForm user={user} handleSubmit={handleSubmit}/>
 };
