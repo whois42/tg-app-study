@@ -5,25 +5,22 @@ import { useEffect, useState } from 'react';
 
 // import { WebAppUser } from '@twa-dev/types';
 import WebApp from '@twa-dev/sdk'
-import { MainButton, BottomBar } from '@twa-dev/sdk/react';
+import { BottomBar } from '@twa-dev/sdk/react';
 import {ProfileForm} from "./components/ProfileForm";
 import {telegramLogin} from "./services/auth";
 import {getEvents} from "./services/events";
-import {getSelf, createUser} from "./services/user";
+import {getSelf} from "./services/user";
 
 // type User = WebAppUser & { added_to_attachment_menu?: boolean; allows_write_to_pm?: boolean } | null
 
 function App() {
   const [user, setUser] = useState(null)
   const [events, setEvents] = useState([]);
+  const [showProfile, setShowProfile] = useState(false);
   useEffect(() => {
     handleTelegramLogin()
     
   }, [])
-
-  const handleClick = () => {
-    WebApp.showAlert(`AAAA`)
-  }
 
   const handleTelegramLogin = async () => {
     if(WebApp.initDataUnsafe.user){
@@ -38,7 +35,7 @@ function App() {
       } catch (error) {
         if (error.response && error.response.status === 404) {
           // User not found, create a new user
-          createUser(telegramData.user);
+          setShowProfile(true);
         } else {
           console.error("Failed to fetch or create user:", error);
         }
@@ -55,13 +52,13 @@ function App() {
 
   return (
     <>
-      <h1>{txt}</h1>
-      <ProfileForm user={user}/>
+      
+      {showProfile? <ProfileForm user={user}/> : <div>{txt}</div>}
       <div className="card">
-        <MainButton
+        {/* <MainButton
           text="{events.length}"
           onClick={handleClick}
-        />
+        /> */}
       </div>
       
       <BottomBar  bgColor='#4287f5'/>
