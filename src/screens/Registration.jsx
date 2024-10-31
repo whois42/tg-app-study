@@ -20,5 +20,5 @@ export const RegistrationForm = ({user}) => {
         console.log(userData, "user data");
       createUser(userData);
     }
-    return <ProfileForm user={user} handleSubmit={handleSubmit}/>
+    return <ProfileForm user={user} onSubmit={handleSubmit}/>
 };
