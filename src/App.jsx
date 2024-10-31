@@ -5,8 +5,8 @@ import { useEffect, useState } from 'react';
 
 // import { WebAppUser } from '@twa-dev/types';
 import WebApp from '@twa-dev/sdk'
-import { BottomBar } from '@twa-dev/sdk/react';
-import {ProfileForm} from "./components/ProfileForm";
+// import { BottomBar } from '@twa-dev/sdk/react';
+import {RegistrationForm} from "./screens/Registration";
 import {telegramLogin} from "./services/auth";
 import {getEvents} from "./services/events";
 import {getSelf} from "./services/user";
@@ -53,15 +53,7 @@ function App() {
   return (
     <>
       
-      {showProfile? <ProfileForm user={user}/> : <div>{txt}</div>}
-      <div className="card">
-        {/* <MainButton
-          text="{events.length}"
-          onClick={handleClick}
-        /> */}
-      </div>
-      
-      <BottomBar  bgColor='#4287f5'/>
+      {showProfile? <RegistrationForm user={user}/> : <div>{txt}</div>}
     </>
   )
 }
