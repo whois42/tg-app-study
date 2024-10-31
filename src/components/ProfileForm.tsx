@@ -55,22 +55,22 @@ export const ProfileForm = ({user, onSubmit}:ProfileFormProps) => {
             <div>
                 <Input
                     header="First name"
-                    value={user.first_name}
+                    value={first_name}
                     onChange={handleFirstNameChange}
                 />
                 <Input
                     header="Last name"
-                    value={user.last_name}
+                    value={last_name}
                     onChange={handleLastNameChange}
                 />
                 <Input
                     header="Company"
-                    value={user.last_name}
+                    value={company}
                     onChange={handleCompanyChange}
                 />
                 <Input
                     header="Position"
-                    value={user.last_name}
+                    value={position}
                     onChange={handlePositionChange}
                 />
             </div>
