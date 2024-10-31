@@ -3,6 +3,7 @@ import { Avatar, Input,} from '@telegram-apps/telegram-ui';
 
 type User = WebAppUser & { added_to_attachment_menu?: boolean; allows_write_to_pm?: boolean } | null
 export const ProfileForm = ({user}:{user: User}) => {
+    console.log(user);
     return user? (
         <div>
             <Avatar
