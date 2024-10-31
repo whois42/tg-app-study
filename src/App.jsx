@@ -25,7 +25,7 @@ function App() {
   const handleTelegramLogin = async () => {
     if(WebApp.initDataUnsafe.user){
     const telegramData = WebApp.initDataUnsafe || {}; // Use Telegram data
-    setUser(telegramData);
+    setUser(telegramData.user);
     try {
       await telegramLogin(telegramData);
       // Reload events after login
