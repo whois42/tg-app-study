@@ -17,6 +17,7 @@ import { ProfileForm } from '../components/ProfileForm';
 export const RegistrationForm = ({user}) => {
 
     const handleSubmit = (userData) => {
+        console.log(userData, "user data");
       createUser(userData);
     }
     return <ProfileForm user={user} handleSubmit={handleSubmit}/>

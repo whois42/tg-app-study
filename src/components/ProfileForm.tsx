@@ -36,6 +36,8 @@ export const ProfileForm = ({user, onSubmit}:ProfileFormProps) => {
     }
 
     const handleSubmit = () => {
+        console.log("submitting", {first_name, last_name, company, position});
+        
         onSubmit({
             username: user?.username || "",
             first_name,
