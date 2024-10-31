@@ -6,6 +6,8 @@ export async function getSelf() {
 }
 
 export async function createUser(telegramData) {
+    console.log(telegramData, "telegram data");
+    
     const userData = {
         username: telegramData.username,
         first_name: telegramData.first_name,
