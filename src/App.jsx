@@ -6,7 +6,7 @@ import { useEffect, useState } from 'react';
 // import { WebAppUser } from '@twa-dev/types';
 import WebApp from '@twa-dev/sdk'
 // import { BottomBar } from '@twa-dev/sdk/react';
-import {RegistrationForm} from "./screens/Registration";
+import {RegistrationForm} from "./screens/Registration.jsx";
 import {telegramLogin} from "./services/auth";
 import {getEvents} from "./services/events";
 import {getSelf} from "./services/user";
