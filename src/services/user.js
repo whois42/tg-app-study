@@ -12,6 +12,8 @@ export async function createUser(telegramData) {
         last_name: telegramData.last_name,
         telegram_id: telegramData.id,
     }
+    console.log(userData, "user data");
+    
     const response = await axiosInstance.post('/users/init/', userData);
     return response.data;
   }
