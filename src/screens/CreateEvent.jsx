@@ -1,6 +1,6 @@
 // import { WebAppUser } from '@twa-dev/types';
-import {createUser} from "../services/user.js";
-import { ProfileForm } from '../components/ProfileForm';
+import { createEvent } from "../services/events";
+import { EventForm} from "../components/EventForm";
 
 // type UserProfile = {
 //     username: string;
@@ -14,10 +14,11 @@ import { ProfileForm } from '../components/ProfileForm';
 // }
 
 // type User = WebAppUser & { added_to_attachment_menu?: boolean; allows_write_to_pm?: boolean } | null
-export const RegistrationScreen = ({user}) => {
+export const CreateEventScreen = ({user}) => {
 
-    const handleSubmit = (userData) => {
-      createUser({telegram_id:user.id, ...userData});
+    const handleSubmit = (eventData) => {
+    console.log(user, "user data");
+      createEvent(eventData);
     }
-    return <ProfileForm user={user} onSubmit={handleSubmit}/>
+    return <EventForm onSubmit={handleSubmit}/>
 };

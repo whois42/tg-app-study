@@ -6,20 +6,22 @@ import { useEffect, useState } from 'react';
 // import { WebAppUser } from '@twa-dev/types';
 import WebApp from '@twa-dev/sdk'
 // import { BottomBar } from '@twa-dev/sdk/react';
-import {RegistrationForm} from "./screens/Registration.jsx";
+import {RegistrationScreen} from "./screens/Registration.jsx";
+import {CreateEventScreen} from "./screens/CreateEvent.jsx";
+import {Layout} from "./screens/Layout.tsx";
+import {DiscoverScreen} from "./screens/Discover.jsx";
+import {UserEventsScreen} from "./screens/UserEvents.jsx";
 import {telegramLogin} from "./services/auth";
-import {getEvents} from "./services/events";
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import {getSelf} from "./services/user";
 
 // type User = WebAppUser & { added_to_attachment_menu?: boolean; allows_write_to_pm?: boolean } | null
 
 function App() {
   const [user, setUser] = useState(null)
-  const [events, setEvents] = useState([]);
-  const [showProfile, setShowProfile] = useState(false);
+  const [isFirstVisit, setIsFirstVisit] = useState(false);
   useEffect(() => {
     handleTelegramLogin()
-    
   }, [])
 
   const handleTelegramLogin = async () => {
@@ -35,26 +37,32 @@ function App() {
       } catch (error) {
         if (error.response && error.response.status === 404) {
           // User not found, create a new user
-          setShowProfile(true);
+          setIsFirstVisit(true);
         } else {
           console.error("Failed to fetch or create user:", error);
         }
       }
-      const events = await getEvents();
-
-      setEvents(events);
     } catch (error) {
       console.error("Telegram login failed:", error);
     }
   }
   };
-  const txt = events.length > 0 ? `You have ${events.length} events` : "No events yet";
 
   return (
-    <>
-      
-      {showProfile? <RegistrationForm user={user}/> : <div>{txt}</div>}
-    </>
+    <Router>
+      <Routes>
+        {/* Redirect to Registration if user is new, otherwise show MainLayout */}
+        <Route path="/" element={isFirstVisit ? <Navigate to="/discover" /> : <Navigate to="/register" />} />
+        <Route path="/register" element={<RegistrationScreen user={user} />} />
+        
+        {/* Main layout with nested routes */}
+        <Route element={<Layout />}>
+          <Route path="/discover" element={<DiscoverScreen />} />
+          <Route path="/create-event" element={<CreateEventScreen />} />
+          <Route path="/my-events" element={<UserEventsScreen />} />
+        </Route>
+      </Routes>
+    </Router>
   )
 }
 
