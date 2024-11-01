@@ -1,10 +1,10 @@
-import React from "react";
+// import React from "react";
 import { useLocation, useNavigate, Outlet } from "react-router-dom";
 // import { Outlet, Link } from 'react-router-dom';
 import { Tabbar } from "@telegram-apps/telegram-ui";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-export const Layout = ({children}: {children: React.ReactNode}) => {
+export const Layout = () => {
     const tabs = [
         {name: "Discover", route: "/discover", Icon: () => <FontAwesomeIcon icon="compass" />}, 
         {name: "Create Event", route: "/create-event", Icon: () => <FontAwesomeIcon icon="plus" />},
