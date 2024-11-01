@@ -52,7 +52,7 @@ function App() {
     <Router>
       <Routes>
         {/* Redirect to Registration if user is new, otherwise show MainLayout */}
-        <Route path="/" element={isFirstVisit ? <Navigate to="/discover" /> : <Navigate to="/register" />} />
+        <Route path="/" element={!isFirstVisit ? <Navigate to="/discover" /> : <Navigate to="/register" />} />
         <Route path="/register" element={<RegistrationScreen user={user} />} />
         
         {/* Main layout with nested routes */}
