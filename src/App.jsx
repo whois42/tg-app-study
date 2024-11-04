@@ -1,12 +1,12 @@
 import './App.css'
+// import { useLaunchParams, miniApp, useSignal } from '@telegram-apps/sdk-react';
 import { useIntegration } from '@telegram-apps/react-router-integration';
-import { initNavigator } from '@telegram-apps/sdk-react';
 
 import { useEffect, useState, useMemo } from 'react';
 // import {BrowserRouter, Route, Routes} from "react-router-dom";
 
 // import { WebAppUser } from '@twa-dev/types';
-import WebApp from '@twa-dev/sdk'
+// import WebApp from '@twa-dev/sdk'
 // import { BottomBar } from '@twa-dev/sdk/react';
 import {RegistrationScreen} from "./screens/Registration.jsx";
 import {CreateEventScreen} from "./screens/CreateEvent.jsx";
@@ -14,7 +14,7 @@ import {Layout} from "./screens/Layout.tsx";
 import {DiscoverScreen} from "./screens/Discover.jsx";
 import {UserEventsScreen} from "./screens/UserEvents.jsx";
 import {telegramLogin} from "./services/auth";
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { HashRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import {getSelf} from "./services/user";
 
 // type User = WebAppUser & { added_to_attachment_menu?: boolean; allows_write_to_pm?: boolean } | null
@@ -57,6 +57,7 @@ function App() {
   }, [navigator]);
 
   useEffect(() => {
+    init();
     WebApp.ready();
     handleTelegramLogin();
     console.log("App.js");
