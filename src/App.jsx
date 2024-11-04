@@ -15,7 +15,7 @@ import {RegistrationScreen} from "./screens/Registration.jsx";
 import {DiscoverScreen} from "./screens/Discover.jsx";
 // import {UserEventsScreen} from "./screens/UserEvents.jsx";
 
-import { HashRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { HashRouter, Routes, Route, Navigate } from 'react-router-dom';
 import {getSelf} from "./services/user";
 import {telegramLogin} from "./services/auth";
 
@@ -81,7 +81,7 @@ function App() {
     platform={['macos', 'ios'].includes(lp.platform) ? 'ios' : 'base'}
   >
     <div>AAAAAA</div>
-    <Router>
+    <HashRouter>
       <Routes>
         <Route path="/" element={!isFirstVisit ? <Navigate to="/discover" /> : <Navigate to="/register" />} />
         <Route path="/register" element={<RegistrationScreen user={user} />} />
@@ -93,7 +93,7 @@ function App() {
           <Route path="/my-events" element={<UserEventsScreen />} />
         </Route> */}
       </Routes>
-    </Router>
+    </HashRouter>
     </AppRoot>
   )
 }
