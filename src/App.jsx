@@ -1,12 +1,13 @@
 import './App.css'
-// import { useLaunchParams, miniApp, useSignal } from '@telegram-apps/sdk-react';
-import { useIntegration } from '@telegram-apps/react-router-integration';
+import { useLaunchParams, miniApp, useSignal } from '@telegram-apps/sdk-react';
+import { AppRoot } from '@telegram-apps/telegram-ui';
+// import { useIntegration } from '@telegram-apps/react-router-integration';
 
 import { useEffect, useState, useMemo } from 'react';
 // import {BrowserRouter, Route, Routes} from "react-router-dom";
 
 // import { WebAppUser } from '@twa-dev/types';
-// import WebApp from '@twa-dev/sdk'
+import WebApp from '@twa-dev/sdk'
 // import { BottomBar } from '@twa-dev/sdk/react';
 import {RegistrationScreen} from "./screens/Registration.jsx";
 import {CreateEventScreen} from "./screens/CreateEvent.jsx";
@@ -22,10 +23,11 @@ import {getSelf} from "./services/user";
 function App() {
   const [user, setUser] = useState(null)
   const [isFirstVisit, setIsFirstVisit] = useState(false);
-  const navigator = useMemo(() => initNavigator('app-navigation-state'), []);
-  const [location, reactNavigator] = useIntegration(navigator);
+  // const navigator = useMemo(() => initNavigator('app-navigation-state'), []);
+  // const [location, reactNavigator] = useIntegration(navigator);
 
   const handleTelegramLogin = async () => {
+    console.log("handleTelegramLogin");
     if(WebApp.initDataUnsafe.user){
     const telegramData = WebApp.initDataUnsafe || {}; // Use Telegram data
     setUser(telegramData.user);
@@ -51,24 +53,29 @@ function App() {
 
   // Don't forget to attach the navigator to allow it to control the BackButton state as well
   // as browser history.
-  useEffect(() => {
-    navigator.attach();
-    return () => navigator.detach();
-  }, [navigator]);
+  // useEffect(() => {
+  //   navigator.attach();
+  //   return () => navigator.detach();
+  // }, [navigator]);
 
   useEffect(() => {
-    init();
+    // init();
     WebApp.ready();
     handleTelegramLogin();
     console.log("App.js");
     
   },[]);
 
+  const lp = useLaunchParams();
+  const isDark = useSignal(miniApp.isDark);
+
 
   return (
-    <>
-    <div>AAAAAAAAA</div>
-    <Router location={location} navigator={reactNavigator}>
+    <AppRoot
+    appearance={isDark ? 'dark' : 'light'}
+    platform={['macos', 'ios'].includes(lp.platform) ? 'ios' : 'base'}
+  >
+    <Router>
       <Routes>
         {/* Redirect to Registration if user is new, otherwise show MainLayout */}
         <Route path="/" element={!isFirstVisit ? <Navigate to="/discover" /> : <Navigate to="/register" />} />
@@ -82,7 +89,7 @@ function App() {
         </Route>
       </Routes>
     </Router>
-    </>
+    </AppRoot>
   )
 }
 
