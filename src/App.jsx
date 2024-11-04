@@ -9,10 +9,10 @@ import { useEffect, useState } from 'react';
 // import { WebAppUser } from '@twa-dev/types';
 import WebApp from '@twa-dev/sdk'
 // import { BottomBar } from '@twa-dev/sdk/react';
-// import {RegistrationScreen} from "./screens/Registration.jsx";
+import {RegistrationScreen} from "./screens/Registration.jsx";
 // import {CreateEventScreen} from "./screens/CreateEvent.jsx";
 // import {Layout} from "./screens/Layout.tsx";
-// import {DiscoverScreen} from "./screens/Discover.jsx";
+import {DiscoverScreen} from "./screens/Discover.jsx";
 // import {UserEventsScreen} from "./screens/UserEvents.jsx";
 
 // import { HashRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
@@ -81,18 +81,19 @@ function App() {
     platform={['macos', 'ios'].includes(lp.platform) ? 'ios' : 'base'}
   >
     <div>AAAAAA</div>
-    {/* <Router>
+    <Router>
       <Routes>
         <Route path="/" element={!isFirstVisit ? <Navigate to="/discover" /> : <Navigate to="/register" />} />
         <Route path="/register" element={<RegistrationScreen user={user} />} />
+        <Route path="/discover" element={<DiscoverScreen />} />
         
-        <Route element={<Layout />}>
+        {/* <Route element={<Layout />}>
           <Route path="/discover" element={<DiscoverScreen />} />
           <Route path="/create-event" element={<CreateEventScreen />} />
           <Route path="/my-events" element={<UserEventsScreen />} />
-        </Route>
+        </Route> */}
       </Routes>
-    </Router> */}
+    </Router>
     </AppRoot>
   )
 }
