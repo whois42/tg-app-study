@@ -15,7 +15,7 @@ import {RegistrationScreen} from "./screens/Registration.jsx";
 import {DiscoverScreen} from "./screens/Discover.jsx";
 // import {UserEventsScreen} from "./screens/UserEvents.jsx";
 
-// import { HashRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { HashRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import {getSelf} from "./services/user";
 import {telegramLogin} from "./services/auth";
 
