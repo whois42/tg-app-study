@@ -15,7 +15,7 @@ import WebApp from '@twa-dev/sdk'
 import {DiscoverScreen} from "./screens/Discover.jsx";
 // import {UserEventsScreen} from "./screens/UserEvents.jsx";
 
-import { HashRouter, Routes, Route } from 'react-router-dom';
+import { HashRouter, Routes, Route, Navigate } from 'react-router-dom';
 import {getSelf} from "./services/user";
 import {telegramLogin} from "./services/auth";
 
@@ -92,6 +92,7 @@ function App() {
           <Route path="/create-event" element={<CreateEventScreen />} />
           <Route path="/my-events" element={<UserEventsScreen />} />
         </Route> */}
+        <Route path="*" element={<Navigate to="/"/>}/>
       </Routes>
     </HashRouter>
     </AppRoot>
