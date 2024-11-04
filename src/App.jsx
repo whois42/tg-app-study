@@ -3,20 +3,21 @@ import { useLaunchParams, miniApp, useSignal } from '@telegram-apps/sdk-react';
 import { AppRoot } from '@telegram-apps/telegram-ui';
 // import { useIntegration } from '@telegram-apps/react-router-integration';
 
-import { useEffect, useState, useMemo } from 'react';
+import { useEffect, useState } from 'react';
 // import {BrowserRouter, Route, Routes} from "react-router-dom";
 
 // import { WebAppUser } from '@twa-dev/types';
 import WebApp from '@twa-dev/sdk'
 // import { BottomBar } from '@twa-dev/sdk/react';
-import {RegistrationScreen} from "./screens/Registration.jsx";
-import {CreateEventScreen} from "./screens/CreateEvent.jsx";
-import {Layout} from "./screens/Layout.tsx";
-import {DiscoverScreen} from "./screens/Discover.jsx";
-import {UserEventsScreen} from "./screens/UserEvents.jsx";
-import {telegramLogin} from "./services/auth";
-import { HashRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+// import {RegistrationScreen} from "./screens/Registration.jsx";
+// import {CreateEventScreen} from "./screens/CreateEvent.jsx";
+// import {Layout} from "./screens/Layout.tsx";
+// import {DiscoverScreen} from "./screens/Discover.jsx";
+// import {UserEventsScreen} from "./screens/UserEvents.jsx";
+
+// import { HashRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import {getSelf} from "./services/user";
+import {telegramLogin} from "./services/auth";
 
 // type User = WebAppUser & { added_to_attachment_menu?: boolean; allows_write_to_pm?: boolean } | null
 
@@ -63,6 +64,10 @@ function App() {
     WebApp.ready();
     handleTelegramLogin();
     console.log("App.js");
+    console.log(user, "user");
+    console.log(isFirstVisit, "isFirstVisit");
+    
+    
     
   },[]);
 
@@ -75,20 +80,19 @@ function App() {
     appearance={isDark ? 'dark' : 'light'}
     platform={['macos', 'ios'].includes(lp.platform) ? 'ios' : 'base'}
   >
-    <Router>
+    <div>AAAAAA</div>
+    {/* <Router>
       <Routes>
-        {/* Redirect to Registration if user is new, otherwise show MainLayout */}
         <Route path="/" element={!isFirstVisit ? <Navigate to="/discover" /> : <Navigate to="/register" />} />
         <Route path="/register" element={<RegistrationScreen user={user} />} />
         
-        {/* Main layout with nested routes */}
         <Route element={<Layout />}>
           <Route path="/discover" element={<DiscoverScreen />} />
           <Route path="/create-event" element={<CreateEventScreen />} />
           <Route path="/my-events" element={<UserEventsScreen />} />
         </Route>
       </Routes>
-    </Router>
+    </Router> */}
     </AppRoot>
   )
 }
