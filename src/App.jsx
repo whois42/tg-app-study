@@ -52,6 +52,7 @@ function App() {
 
 
   return (
+    <>
     <Router>
       <Routes>
         {/* Redirect to Registration if user is new, otherwise show MainLayout */}
@@ -66,6 +67,7 @@ function App() {
         </Route>
       </Routes>
     </Router>
+    </>
   )
 }
 
