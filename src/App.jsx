@@ -1,6 +1,8 @@
 import './App.css'
+import { useIntegration } from '@telegram-apps/react-router-integration';
+import { initNavigator } from '@telegram-apps/sdk-react';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useMemo } from 'react';
 // import {BrowserRouter, Route, Routes} from "react-router-dom";
 
 // import { WebAppUser } from '@twa-dev/types';
@@ -20,6 +22,9 @@ import {getSelf} from "./services/user";
 function App() {
   const [user, setUser] = useState(null)
   const [isFirstVisit, setIsFirstVisit] = useState(false);
+  const navigator = useMemo(() => initNavigator('app-navigation-state'), []);
+  const [location, reactNavigator] = useIntegration(navigator);
+
   const handleTelegramLogin = async () => {
     if(WebApp.initDataUnsafe.user){
     const telegramData = WebApp.initDataUnsafe || {}; // Use Telegram data
@@ -43,6 +48,14 @@ function App() {
     }
   }
   };
+
+  // Don't forget to attach the navigator to allow it to control the BackButton state as well
+  // as browser history.
+  useEffect(() => {
+    navigator.attach();
+    return () => navigator.detach();
+  }, [navigator]);
+
   useEffect(() => {
     WebApp.ready();
     handleTelegramLogin();
@@ -54,7 +67,7 @@ function App() {
   return (
     <>
     <div>AAAAAAAAA</div>
-    <Router>
+    <Router location={location} navigator={reactNavigator}>
       <Routes>
         {/* Redirect to Registration if user is new, otherwise show MainLayout */}
         <Route path="/" element={!isFirstVisit ? <Navigate to="/discover" /> : <Navigate to="/register" />} />

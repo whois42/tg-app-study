@@ -579,6 +579,11 @@
   dependencies:
     defer-to-connect "^2.0.0"
 
+"@telegram-apps/react-router-integration@^1.0.1":
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/@telegram-apps/react-router-integration/-/react-router-integration-1.0.1.tgz#a42a28b45d8f5f224845801599a91a776191bfa8"
+  integrity sha512-q5fC0ihXyUDqrSdLQ3u3gypmjI/rMU2mTHeAz9IU1F1bl5X+J17LxWmgLp+OlD0Y97bq2XYmc+UbKrYh+eN3Wg==
+
 "@telegram-apps/telegram-ui@^2.1.8":
   version "2.1.8"
   resolved "https://registry.yarnpkg.com/@telegram-apps/telegram-ui/-/telegram-ui-2.1.8.tgz#97b9145a7aaa0fd0e705b65248c225df655957e5"
