@@ -11,11 +11,11 @@ import WebApp from '@twa-dev/sdk'
 // import { BottomBar } from '@twa-dev/sdk/react';
 // import {RegistrationScreen} from "./screens/Registration.jsx";
 // import {CreateEventScreen} from "./screens/CreateEvent.jsx";
-import {Layout} from "./screens/Layout.tsx";
+// import {Layout} from "./screens/Layout.tsx";
 import {DiscoverScreen} from "./screens/Discover.jsx";
 // import {UserEventsScreen} from "./screens/UserEvents.jsx";
 
-import { HashRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { HashRouter, Routes, Route } from 'react-router-dom';
 import {getSelf} from "./services/user";
 import {telegramLogin} from "./services/auth";
 
