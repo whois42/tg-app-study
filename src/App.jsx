@@ -20,10 +20,6 @@ import {getSelf} from "./services/user";
 function App() {
   const [user, setUser] = useState(null)
   const [isFirstVisit, setIsFirstVisit] = useState(false);
-  useEffect(() => {
-    handleTelegramLogin()
-  }, [])
-
   const handleTelegramLogin = async () => {
     if(WebApp.initDataUnsafe.user){
     const telegramData = WebApp.initDataUnsafe || {}; // Use Telegram data
@@ -47,13 +43,20 @@ function App() {
     }
   }
   };
+  useEffect(() => {
+    WebApp.ready();
+    handleTelegramLogin();
+    console.log("App.js");
+    
+  },[]);
+
 
   return (
     <Router>
       <Routes>
         {/* Redirect to Registration if user is new, otherwise show MainLayout */}
-        {/* <Route path="/" element={!isFirstVisit ? <Navigate to="/discover" /> : <Navigate to="/register" />} />
-        <Route path="/register" element={<RegistrationScreen user={user} />} /> */}
+        <Route path="/" element={!isFirstVisit ? <Navigate to="/discover" /> : <Navigate to="/register" />} />
+        <Route path="/register" element={<RegistrationScreen user={user} />} />
         
         {/* Main layout with nested routes */}
         <Route element={<Layout />}>
