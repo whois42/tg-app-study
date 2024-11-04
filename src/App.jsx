@@ -53,6 +53,7 @@ function App() {
 
   return (
     <>
+    <div>AAAAAAAAA</div>
     <Router>
       <Routes>
         {/* Redirect to Registration if user is new, otherwise show MainLayout */}
