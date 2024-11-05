@@ -51,14 +51,7 @@ function App() {
     }
   }
   };
-
-  // Don't forget to attach the navigator to allow it to control the BackButton state as well
-  // as browser history.
-  // useEffect(() => {
-  //   navigator.attach();
-  //   return () => navigator.detach();
-  // }, [navigator]);
-
+  
   useEffect(() => {
     // init();
     WebApp.ready();
@@ -92,7 +85,7 @@ function App() {
           <Route path="/create-event" element={<CreateEventScreen />} />
           <Route path="/my-events" element={<UserEventsScreen />} />
         </Route>
-        <Route path="*" element={isFirstVisit ? <Navigate to="/discover" /> : <Navigate to="/register" />}/>
+        <Route path="*" element={!isFirstVisit ? <Navigate to="/discover" /> : <Navigate to="/register" />}/>
       </Routes>
     </HashRouter>
     </AppRoot>
