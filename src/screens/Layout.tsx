@@ -1,10 +1,8 @@
-// import React from "react";
 import { Tabbar } from "@telegram-apps/telegram-ui";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useLocation, useNavigate, Outlet } from "react-router-dom";
 
 export const Layout = () => {
-    console.log("Layout");
     const tabs = [
         {name: "Discover", route: "/discover", Icon: () => <FontAwesomeIcon icon="compass" />}, 
         {name: "Create Event", route: "/create-event", Icon: () => <FontAwesomeIcon icon="plus" />},
