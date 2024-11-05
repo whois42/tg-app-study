@@ -15,6 +15,8 @@ import { ProfileForm } from '../components/ProfileForm';
 
 // type User = WebAppUser & { added_to_attachment_menu?: boolean; allows_write_to_pm?: boolean } | null
 export const RegistrationScreen = ({user}) => {
+    console.log('RegistrationScreen');
+    
 
     const handleSubmit = (userData) => {
       createUser({telegram_id:user.id, ...userData});
