@@ -83,7 +83,7 @@ function App() {
     <div>AAAAAA</div>
     <HashRouter>
       <Routes>
-        <Route path="/" element={isFirstVisit ? <Navigate to="/discover" /> : <Navigate to="/register" />} />
+        <Route path="/"  />
         <Route path="/register" element={<RegistrationScreen user={user} />} />
         <Route path="/discover" element={<DiscoverScreen />} />
         
@@ -92,6 +92,7 @@ function App() {
           <Route path="/create-event" element={<CreateEventScreen />} />
           <Route path="/my-events" element={<UserEventsScreen />} />
         </Route>
+        <Route path="*" element={isFirstVisit ? <Navigate to="/discover" /> : <Navigate to="/register" />}/>
       </Routes>
     </HashRouter>
     </AppRoot>
