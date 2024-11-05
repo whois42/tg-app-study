@@ -56,12 +56,6 @@ function App() {
     // init();
     WebApp.ready();
     handleTelegramLogin();
-    console.log("App.js");
-    console.log(user, "user");
-    console.log(isFirstVisit, "isFirstVisit");
-    
-    
-    
   },[]);
 
   const lp = useLaunchParams();
@@ -78,7 +72,6 @@ function App() {
       <Routes>
         <Route path="/"  />
         <Route path="/register" element={<RegistrationScreen user={user} />} />
-        <Route path="/discover" element={<DiscoverScreen />} />
         
         <Route element={<Layout />}>
           <Route path="/discover" element={<DiscoverScreen />} />
