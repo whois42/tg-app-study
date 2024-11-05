@@ -3,13 +3,13 @@ import { EventList } from "../components/EventList";
 import { useEffect, useState } from "react";
 
 export const DiscoverScreen = () => {
+    console.log("DiscoverScreen");
     const [events, setEvents] = useState([]);
     const getEventsData = async () => {
         const eventsData = await getEvents();
         setEvents(eventsData);
     }
     useEffect(() => {
-        console.log("DiscoverScreen");
         
         getEventsData();
     }, [])
