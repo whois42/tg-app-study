@@ -6,7 +6,7 @@ export async function getEvents() {
 }
 
 export async function createEvent(eventData) {
-  const response = await axiosInstance.post('/events/', eventData);
+  const response = await axiosInstance.post('/events/create', eventData);
   return response.data;
 }
 
