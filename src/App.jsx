@@ -24,6 +24,7 @@ import {telegramLogin} from "./services/auth";
 function App() {
   const [user, setUser] = useState(null)
   const [isFirstVisit, setIsFirstVisit] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   // const navigator = useMemo(() => initNavigator('app-navigation-state'), []);
   // const [location, reactNavigator] = useIntegration(navigator);
 
@@ -52,6 +53,7 @@ function App() {
     } finally
     {
       console.log("Finally");
+      setIsLoading(false);
     }
   }
   };
@@ -75,7 +77,7 @@ function App() {
     appearance={isDark ? 'dark' : 'light'}
     platform={['macos', 'ios'].includes(lp.platform) ? 'ios' : 'base'}
   >
-    <div>{isFirstVisit}</div>
+{  isLoading ?  <div>Loading</div> :
     <HashRouter>
       <Routes>
         <Route path="/"  />
@@ -87,7 +89,7 @@ function App() {
           <Route path="/my-events" element={<UserEventsScreen />} />
         </Route>
       </Routes>
-    </HashRouter>
+    </HashRouter>}
     </AppRoot>
   )
 }
