@@ -41,6 +41,7 @@ function App() {
       } catch (error) {
         if (error.response && error.response.status === 404) {
           // User not found, create a new user
+          console.log("User not found, creating a new user");
           setIsFirstVisit(true);
         } else {
           console.error("Failed to fetch or create user:", error);
