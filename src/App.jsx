@@ -49,6 +49,9 @@ function App() {
       }
     } catch (error) {
       console.error("Telegram login failed:", error);
+    } finally
+    {
+      console.log("Finally");
     }
   }
   };
@@ -68,6 +71,7 @@ function App() {
     appearance={isDark ? 'dark' : 'light'}
     platform={['macos', 'ios'].includes(lp.platform) ? 'ios' : 'base'}
   >
+    <div>{isFirstVisit}</div>
     <HashRouter>
       <Routes>
         <Route path="/"  />
