@@ -15,7 +15,7 @@ import {Layout} from "./screens/Layout.tsx";
 import {DiscoverScreen} from "./screens/Discover.jsx";
 import {UserEventsScreen} from "./screens/UserEvents.jsx";
 
-import { HashRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { HashRouter, Routes, Route, Navigate, useNavigate } from 'react-router-dom';
 import {getSelf} from "./services/user";
 import {telegramLogin} from "./services/auth";
 
@@ -25,6 +25,7 @@ function App() {
   const [user, setUser] = useState(null)
   const [isFirstVisit, setIsFirstVisit] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+  const navigate = useNavigate();
   // const navigator = useMemo(() => initNavigator('app-navigation-state'), []);
   // const [location, reactNavigator] = useIntegration(navigator);
 
@@ -44,6 +45,7 @@ function App() {
           // User not found, create a new user
           console.log("User not found, creating a new user");
           setIsFirstVisit(true);
+          navigate("/register");
         } else {
           console.error("Failed to fetch or create user:", error);
         }
