@@ -15,17 +15,17 @@ import {Layout} from "./screens/Layout.tsx";
 import {DiscoverScreen} from "./screens/Discover.jsx";
 import {UserEventsScreen} from "./screens/UserEvents.jsx";
 
-import { HashRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { HashRouter, Routes, Route, useNavigate } from 'react-router-dom';
 import {getSelf} from "./services/user";
 import {telegramLogin} from "./services/auth";
 
 // type User = WebAppUser & { added_to_attachment_menu?: boolean; allows_write_to_pm?: boolean } | null
-
+// import { useNavigate } from 'react-router-dom';
 function App() {
   const [user, setUser] = useState(null)
   const [isFirstVisit, setIsFirstVisit] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
   // const navigator = useMemo(() => initNavigator('app-navigation-state'), []);
   // const [location, reactNavigator] = useIntegration(navigator);
 
@@ -45,7 +45,7 @@ function App() {
           // User not found, create a new user
           console.log("User not found, creating a new user");
           setIsFirstVisit(true);
-          
+          navigate("/register");
         } else {
           console.error("Failed to fetch or create user:", error);
         }
@@ -83,7 +83,6 @@ function App() {
     <HashRouter>
       <Routes>
         <Route path="/"  element={<Layout />}>
-          {/* <Route path="*" element={!isFirstVisit ? <Navigate to="/discover" /> : <Navigate to="/register" />}/> */}
           <Route path="/register" element={<RegistrationScreen user={user} />} />
           <Route path="/discover" element={<DiscoverScreen />} />
           <Route path="/create-event" element={<CreateEventScreen />} />
