@@ -33,6 +33,8 @@ function App() {
       } catch (error) {
         if (error.response && error.response.status === 404) {
           setIsFirstVisit(true);
+          console.log(isFirstVisit);
+          
           navigate("/register");
         } else {
           console.error("Failed to fetch or create user:", error);
