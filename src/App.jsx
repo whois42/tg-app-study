@@ -45,7 +45,12 @@ function App() {
           // User not found, create a new user
           console.log("User not found, creating a new user");
           setIsFirstVisit(true);
-          navigate("/register");
+          try {
+            navigate("/register");
+          } catch (error) { 
+            console.error("Failed to navigate to /register:", error);
+          }
+          // navigate("/register");
         } else {
           console.error("Failed to fetch or create user:", error);
         }
