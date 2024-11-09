@@ -15,13 +15,12 @@ import {Layout} from "./screens/Layout.tsx";
 import {DiscoverScreen} from "./screens/Discover.jsx";
 import {UserEventsScreen} from "./screens/UserEvents.jsx";
 
-import { HashRouter, Routes, Route, useNavigate } from 'react-router-dom';
+import { HashRouter, Routes, Route, Navigate } from 'react-router-dom';
 import {getSelf} from "./services/user";
 import {telegramLogin} from "./services/auth";
-import { is } from 'date-fns/locale';
 
 // type User = WebAppUser & { added_to_attachment_menu?: boolean; allows_write_to_pm?: boolean } | null
-// import { useNavigate } from 'react-router-dom';
+
 function App() {
   const [user, setUser] = useState(null)
   const [isFirstVisit, setIsFirstVisit] = useState(false);
@@ -46,17 +45,20 @@ function App() {
           // User not found, create a new user
           console.log("User not found, creating a new user");
           setIsFirstVisit(true);
+          
         } else {
           console.error("Failed to fetch or create user:", error);
         }
       }
     } catch (error) {
       console.error("Telegram login failed:", error);
-    } finally {
+    } finally
+    {
+      console.log("Finally");
       setIsLoading(false);
     }
     console.log(isFirstVisit, "isFirstVisit");
-    
+  }
   };
   
   useEffect(() => {
@@ -68,7 +70,6 @@ function App() {
   const lp = useLaunchParams();
   const isDark = useSignal(miniApp.isDark);
   console.log(lp, "launch params");
-  console.log(isFirstVisit, "isFirstVisit");
   
   
 
@@ -82,6 +83,7 @@ function App() {
     <HashRouter>
       <Routes>
         <Route path="/"  element={<Layout />}>
+          <Route path="*" element={!isFirstVisit ? <Navigate to="/discover" /> : <Navigate to="/register" />}/>
           <Route path="/register" element={<RegistrationScreen user={user} />} />
           <Route path="/discover" element={<DiscoverScreen />} />
           <Route path="/create-event" element={<CreateEventScreen />} />
