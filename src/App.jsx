@@ -1,14 +1,8 @@
 import './App.css'
 import { useLaunchParams, miniApp, useSignal } from '@telegram-apps/sdk-react';
 import { AppRoot } from '@telegram-apps/telegram-ui';
-// import { useIntegration } from '@telegram-apps/react-router-integration';
-
 import { useEffect, useState } from 'react';
-// import {BrowserRouter, Route, Routes} from "react-router-dom";
-
-// import { WebAppUser } from '@twa-dev/types';
 import WebApp from '@twa-dev/sdk'
-// import { BottomBar } from '@twa-dev/sdk/react';
 import {RegistrationScreen} from "./screens/Registration.jsx";
 import {CreateEventScreen} from "./screens/CreateEvent.jsx";
 import {Layout} from "./screens/Layout.tsx";
@@ -19,18 +13,13 @@ import { HashRouter, Routes, Route, Navigate } from 'react-router-dom';
 import {getSelf} from "./services/user";
 import {telegramLogin} from "./services/auth";
 
-// type User = WebAppUser & { added_to_attachment_menu?: boolean; allows_write_to_pm?: boolean } | null
 
 function App() {
   const [user, setUser] = useState(null)
   const [isFirstVisit, setIsFirstVisit] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
-  // const navigate = useNavigate();
-  // const navigator = useMemo(() => initNavigator('app-navigation-state'), []);
-  // const [location, reactNavigator] = useIntegration(navigator);
 
   const handleTelegramLogin = async () => {
-    console.log("handleTelegramLogin");
     if(WebApp.initDataUnsafe.user){
     const telegramData = WebApp.initDataUnsafe || {}; // Use Telegram data
     setUser(telegramData.user);
