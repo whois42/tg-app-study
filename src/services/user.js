@@ -6,13 +6,6 @@ export async function getSelf() {
 }
 
 export async function createUser(userData) {
-    console.log(userData, "user data");
-    
-    const response = await axiosInstance.post('/users/init/', userData);
+    const response = await axiosInstance.post('/users', userData);
     return response.data;
   }
-
-export async function updateUser(userData) {
-  const response = await axiosInstance.put('/users/self/', userData);
-  return response.data;
-}

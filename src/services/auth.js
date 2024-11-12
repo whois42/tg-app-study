@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const BASE_URL = 'https://2381-87-212-202-77.ngrok-free.app';
+const BASE_URL = 'https://3859-87-212-202-77.ngrok-free.app';
 
 // Initialize Telegram Login
 export async function telegramLogin(telegramData) {
