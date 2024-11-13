@@ -69,13 +69,13 @@ function App() {
         <HashRouter>
           <Routes>
             <Route path="/" element={!isFirstVisit ? <Navigate to="/events/discover" /> : <Navigate to="/register" />} />
-            <Route path="/register" element={<RegistrationScreen />} />
             <Route path="/events" element={<Layout />}>
               <Route path="discover" element={<DiscoverScreen />} />
               <Route path="create-event" element={<CreateEventScreen />} />
               <Route path="my-events" element={<UserEventsScreen />} />
               <Route path="*" element={<Navigate to="discover" />} />
             </Route>
+            <Route path="/register" element={<RegistrationScreen />} />
             <Route path="*" element={<Navigate to="/" />} />
           </Routes>
         </HashRouter>
