@@ -10,7 +10,6 @@ export const DiscoverScreen = () => {
         setEvents(eventsData);
     }
     useEffect(() => {
-        
         getEventsData();
     }, [])
     return <EventList events={events}/>

@@ -65,7 +65,6 @@ function App() {
 
   const lp = useLaunchParams();
   const isDark = useSignal(miniApp.isDark);
-  console.log('isFirstVisit', isFirstVisit);
   
 
   return (
@@ -80,9 +79,10 @@ function App() {
               <Route path="discover" element={<DiscoverScreen />} />
               <Route path="create-event" element={<CreateEventScreen />} />
               <Route path="my-events" element={<UserEventsScreen />} />
+              <Route path="*" element={<Navigate to="discover" />} />
             </Route>
             <Route path="/register" element={<RegistrationScreen user={user} />} />
-            <Route path="*" element={<Navigate to="/events/discover" />} />
+            <Route path="*" element={<Navigate to="/events" />} />
           </Routes>
         </HashRouter>
       )}
