@@ -2,7 +2,7 @@ import { Tabbar } from "@telegram-apps/telegram-ui";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useLocation, useNavigate, Outlet } from "react-router-dom";
 
-export const Layout = () => {
+export const Layout = ({isFirstVisit}:{isFirstVisit: boolean}) => {
     const tabs = [
         {name: "Discover", route: "/discover", Icon: () => <FontAwesomeIcon icon="compass" />}, 
         {name: "Create Event", route: "/create-event", Icon: () => <FontAwesomeIcon icon="plus" />},
@@ -11,6 +11,10 @@ export const Layout = () => {
     const navigate = useNavigate();
     const handleTabClick = (route: string) => {
         navigate(route);
+    }
+    if(isFirstVisit){
+        console.log("First Visit LAyout");
+        
     }
 
     return (
