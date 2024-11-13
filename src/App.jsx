@@ -20,40 +20,39 @@ function App() {
   const [isLoading, setIsLoading] = useState(true);
 
   const handleTelegramLogin = async () => {
-    if(WebApp.initDataUnsafe.user){
     const telegramData = WebApp.initDataUnsafe || {}; // Use Telegram data
-    setUser(telegramData.user);
-    try {
-      await telegramLogin(telegramData);
-      // Reload events after login
+    if (telegramData.user) {
+      setUser(telegramData.user);
       try {
-        const user = await getSelf();
-        setUser(user);
-      } catch (error) {
-        if (error.response && error.response.status === 404) {
-          // User not found, create a new user
-          console.log("User not found, creating a new user");
-          setIsFirstVisit(true);
-          
-        } else {
-          console.error("Failed to fetch or create user:", error);
+        await telegramLogin(telegramData);
+        // Reload events after login
+        try {
+          const user = await getSelf();
+          setUser(user);
+        } catch (error) {
+          if (error.response && error.response.status === 404) {
+            // User not found, create a new user
+            console.log("User not found, creating a new user");
+            setIsFirstVisit(true);
+          } else {
+            console.error("Failed to fetch or create user:", error);
+          }
         }
+      } catch (error) {
+        console.error("Telegram login failed:", error);
+      } finally {
+        console.log("Finally");
+        setIsLoading(false);
       }
-    } catch (error) {
-      console.error("Telegram login failed:", error);
-    } finally
-    {
-      console.log("Finally");
+    } else {
       setIsLoading(false);
     }
-  }
   };
   
   useEffect(() => {
-    // init();
     WebApp.ready();
     handleTelegramLogin();
-  },[]);
+  }, []);
 
   const lp = useLaunchParams();
   const isDark = useSignal(miniApp.isDark);
