@@ -9,7 +9,7 @@ import { Layout } from "./screens/Layout.tsx";
 import { DiscoverScreen } from "./screens/Discover.jsx";
 import { UserEventsScreen } from "./screens/UserEvents.jsx";
 
-import { HashRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { HashRouter, Routes, Route, Navigate, useNavigate } from 'react-router-dom';
 import { getSelf } from "./services/user";
 import { telegramLogin } from "./services/auth";
 
@@ -17,7 +17,7 @@ function App() {
   const [user, setUser] = useState(null);
   const [isFirstVisit, setIsFirstVisit] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
 
   const handleTelegramLogin = async () => {
     const telegramData = WebApp.initDataUnsafe || {}; // Use Telegram data
@@ -53,15 +53,15 @@ function App() {
   }, []);
 
   // // Redirect based on login status and first visit
-  // useEffect(() => {
-  //   if (!isLoading) {
-  //     if (isFirstVisit) {
-  //       navigate('/register');
-  //     } else {
-  //       navigate('/events/discover');
-  //     }
-  //   }
-  // }, [isFirstVisit, isLoading, navigate]);
+  useEffect(() => {
+    if (!isLoading) {
+      if (isFirstVisit) {
+        navigate('/register');
+      } else {
+        navigate('/events/discover');
+      }
+    }
+  }, [isFirstVisit, isLoading, navigate]);
 
   const lp = useLaunchParams();
   const isDark = useSignal(miniApp.isDark);
