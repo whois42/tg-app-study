@@ -28,6 +28,8 @@ export const UserProvider = ({ children }: UserProviderProps) => {
   const [user, setUser] = useState<User | null>(null);
 
   const updateUser = (userData: User) => {
+    console.log("updating user", userData);
+    
     setUser(userData);
   };
 
