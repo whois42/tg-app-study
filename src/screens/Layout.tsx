@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useLocation, useNavigate, Outlet } from "react-router-dom";
 import { useEffect } from "react";
 
-export const Layout = () => {
+export const Layout = ({isFirstVisit}:{isFirstVisit:boolean}) => {
     const tabs = [
         {name: "Discover", route: "/discover", Icon: () => <FontAwesomeIcon icon="compass" />}, 
         {name: "Create Event", route: "/create-event", Icon: () => <FontAwesomeIcon icon="plus" />},
