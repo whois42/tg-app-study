@@ -18,6 +18,8 @@ function App() {
   const [isLoading, setIsLoading] = useState(true);
 
   const userCtx = useUser();
+  console.log(userCtx);
+  
 
   const handleTelegramLogin = async () => {
     const telegramData = WebApp.initDataUnsafe || {}; 
@@ -26,7 +28,7 @@ function App() {
         await telegramLogin(telegramData);
         try {
           const fetchedUser = await getSelf();
-          userCtx.updateUser(fetchedUser);
+          userCtx?.updateUser(fetchedUser);
         } catch (error) {
           if (error.response && error.response.status === 404) {
             setIsFirstVisit(true);
@@ -45,10 +47,11 @@ function App() {
   };
 
   useEffect(() => {
+    console.log(userCtx, "userCtx");
     WebApp.ready();
     handleTelegramLogin();
     console.log(isFirstVisit);
-    console.log(userCtx.user);
+    console.log(userCtx?.user);
     
     
   }, []);
