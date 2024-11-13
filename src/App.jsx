@@ -82,7 +82,7 @@ function App() {
               <Route path="*" element={<Navigate to="discover" />} />
             </Route>
             <Route path="/register" element={<RegistrationScreen user={user} />} />
-            <Route path="*" element={<Navigate to="/events" />} />
+            <Route path="*" element={<Navigate to="/"/>}/>
           </Routes>
         </HashRouter>
       )}
