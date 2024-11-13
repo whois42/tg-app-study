@@ -17,6 +17,8 @@ export const Layout = ({isFirstVisit}:{isFirstVisit: boolean}) => {
         console.log("isFirstVisit", isFirstVisit);
         
         if (isFirstVisit) {
+            console.log("navigating to register");
+            
             navigate("/register");
         }
     }, [isFirstVisit, navigate]);
