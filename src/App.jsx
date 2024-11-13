@@ -30,6 +30,8 @@ function App() {
         try {
           const fetchedUser = await getSelf();
           setUser(fetchedUser); // Update user in context
+          console.log(user);
+          
         } catch (error) {
           if (error.response && error.response.status === 404) {
             console.log("User not found, creating a new user");
