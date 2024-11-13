@@ -65,6 +65,8 @@ function App() {
 
   const lp = useLaunchParams();
   const isDark = useSignal(miniApp.isDark);
+  console.log(isFirstVisit);
+  
 
   return (
     <AppRoot
