@@ -3,35 +3,18 @@ import { createContext, useState, ReactNode } from 'react';
 type User = {
     id: number,
     username: string,
-    first_name: string
-    last_name: string
+    first_name: string,
+    last_name: string,
     telegram_id: string
 }
 
-interface UserContextType {
-  user: User | null;
-  updateUser: (userData: User) => void;
-}
+const UserContext = createContext<{ user: User | null, updateUser: (userData: User) => void } | null>(null);
 
-export const UserContext = createContext<UserContextType | undefined>(
-    {
-        user: null,
-        updateUser: () => {}
-    }
-);
-
-interface UserProviderProps {
-  children: ReactNode;
-}
-
-export const UserProvider = ({ children }: UserProviderProps) => {
+export const UserProvider = ({ children }: { children: ReactNode }) => {
   const [user, setUser] = useState<User | null>(null);
 
+  // Define updateUser explicitly with a parameter
   const updateUser = (userData: User) => {
-    console.log("AAAAAAAAAAA");
-    
-    console.log("updating user", userData);
-    
     setUser(userData);
   };
 
