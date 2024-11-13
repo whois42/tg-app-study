@@ -1,6 +1,7 @@
 import { Tabbar } from "@telegram-apps/telegram-ui";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useLocation, useNavigate, Outlet } from "react-router-dom";
+import { useEffect } from "react";
 
 export const Layout = ({isFirstVisit}:{isFirstVisit: boolean}) => {
     const tabs = [
@@ -12,10 +13,11 @@ export const Layout = ({isFirstVisit}:{isFirstVisit: boolean}) => {
     const handleTabClick = (route: string) => {
         navigate(route);
     }
-    if(isFirstVisit){
-        console.log("First Visit LAyout", isFirstVisit);
-        
-    }
+    useEffect(() => {
+        if (isFirstVisit) {
+            navigate("/register");
+        }
+    }, [isFirstVisit, navigate]);
 
     return (
         <div>
