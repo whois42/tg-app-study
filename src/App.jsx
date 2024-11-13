@@ -11,21 +11,22 @@ import { UserEventsScreen } from "./screens/UserEvents.jsx";
 import { HashRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { getSelf } from "./services/user";
 import { telegramLogin } from "./services/auth";
+import { UserProvider, useUser } from './context/UserContext';
 
 function App() {
-  const [user, setUser] = useState(null);
   const [isFirstVisit, setIsFirstVisit] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+
+  const { user, updateUser } = useUser();
 
   const handleTelegramLogin = async () => {
     const telegramData = WebApp.initDataUnsafe || {}; 
     if (telegramData.user) {
-      setUser(telegramData.user);
       try {
         await telegramLogin(telegramData);
         try {
           const fetchedUser = await getSelf();
-          setUser(fetchedUser);
+          updateUser(fetchedUser);
         } catch (error) {
           if (error.response && error.response.status === 404) {
             setIsFirstVisit(true);
@@ -46,12 +47,17 @@ function App() {
   useEffect(() => {
     WebApp.ready();
     handleTelegramLogin();
+    console.log(isFirstVisit);
+    console.log(user);
+    
+    
   }, []);
 
   const lp = useLaunchParams();
   const isDark = useSignal(miniApp.isDark);
 
   return (
+    <UserProvider>
     <AppRoot
       appearance={isDark ? 'dark' : 'light'}
       platform={['macos', 'ios'].includes(lp.platform) ? 'ios' : 'base'}
@@ -65,10 +71,10 @@ function App() {
             <Route path="/" element={<Navigate to={"/events/discover"} replace />} />
             
             {/* Registration Screen */}
-            <Route path="/register" element={<RegistrationScreen user={user} />} />
+            <Route path="/register" element={<RegistrationScreen/>} />
             
             {/* Events layout with sub-routes */}
-            <Route path="/events" element={<Layout />}>
+            <Route path="/events" element={<Layout/>}>
               <Route path="discover" element={<DiscoverScreen />} />
               <Route path="create-event" element={<CreateEventScreen />} />
               <Route path="my-events" element={<UserEventsScreen />} />
@@ -81,6 +87,7 @@ function App() {
         </HashRouter>
       )}
     </AppRoot>
+    </UserProvider>
   );
 }
 
