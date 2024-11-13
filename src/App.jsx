@@ -8,7 +8,6 @@ import { CreateEventScreen } from "./screens/CreateEvent.jsx";
 import { Layout } from "./screens/Layout.tsx";
 import { DiscoverScreen } from "./screens/Discover.jsx";
 import { UserEventsScreen } from "./screens/UserEvents.jsx";
-
 import { HashRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { getSelf } from "./services/user";
 import { telegramLogin } from "./services/auth";
@@ -17,24 +16,21 @@ function App() {
   const [user, setUser] = useState(null);
   const [isFirstVisit, setIsFirstVisit] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
-  // const navigate = useNavigate();
 
   const handleTelegramLogin = async () => {
-    const telegramData = WebApp.initDataUnsafe || {}; // Use Telegram data
+    const telegramData = WebApp.initDataUnsafe || {}; 
     if (telegramData.user) {
       setUser(telegramData.user);
       try {
         await telegramLogin(telegramData);
-        // Reload events after login
         try {
-          const user = await getSelf();
-          setUser(user);
+          const fetchedUser = await getSelf();
+          setUser(fetchedUser);
         } catch (error) {
           if (error.response && error.response.status === 404) {
-            console.log("User not found, creating a new user");
             setIsFirstVisit(true);
           } else {
-            console.error("Failed to fetch or create user:", error);
+            console.error("Error fetching user:", error);
           }
         }
       } catch (error) {
@@ -52,37 +48,35 @@ function App() {
     handleTelegramLogin();
   }, []);
 
-  // // Redirect based on login status and first visit
-  // useEffect(() => {
-  //   if (!isLoading) {
-  //     if (isFirstVisit) {
-  //       navigate('/register');
-  //     } else {
-  //       navigate('/events/discover');
-  //     }
-  //   }
-  // }, [isFirstVisit, isLoading, navigate]);
-
   const lp = useLaunchParams();
   const isDark = useSignal(miniApp.isDark);
-  
 
   return (
     <AppRoot
       appearance={isDark ? 'dark' : 'light'}
       platform={['macos', 'ios'].includes(lp.platform) ? 'ios' : 'base'}
     >
-      {isLoading ? <div>Loading</div> : (
+      {isLoading ? (
+        <div>Loading</div>
+      ) : (
         <HashRouter>
           <Routes>
-            <Route path="/events" element={<Layout isFirstVisit={isFirstVisit}/>}>
+            {/* Redirect based on first visit */}
+            <Route path="/" element={<Navigate to={isFirstVisit ? "/register" : "/events/discover"} replace />} />
+            
+            {/* Registration Screen */}
+            <Route path="/register" element={<RegistrationScreen user={user} />} />
+            
+            {/* Events layout with sub-routes */}
+            <Route path="/events" element={<Layout />}>
               <Route path="discover" element={<DiscoverScreen />} />
               <Route path="create-event" element={<CreateEventScreen />} />
               <Route path="my-events" element={<UserEventsScreen />} />
-              <Route path="*" element={<Navigate to="discover" />} />
+              <Route path="*" element={<Navigate to="discover" replace />} />
             </Route>
-            <Route path="/register" element={<RegistrationScreen user={user} />} />
-            <Route path="*" element={<Navigate to="/"/>}/>
+
+            {/* Catch-all for undefined routes */}
+            <Route path="*" element={<Navigate to="/" replace />} />
           </Routes>
         </HashRouter>
       )}
