@@ -22,6 +22,8 @@ export const RegistrationScreen = () => {
 
     useEffect(() => {
         const telegramData = WebApp.initDataUnsafe || {};
+        console.log("RRRRR", telegramData.user);
+        
         setUser(telegramData.user);
     }, []);
 
