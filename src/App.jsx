@@ -68,8 +68,7 @@ function App() {
       ) : (
         <HashRouter>
           <Routes>
-            <Route path="/" element={!isFirstVisit ? <Navigate to="/events/discover" /> : <Navigate to="/register" />} />
-            <Route path="/events" element={<Layout />}>
+            <Route path="/" element={ <Navigate to="/events" />}
               <Route path="discover" element={<DiscoverScreen />} />
               <Route path="create-event" element={<CreateEventScreen />} />
               <Route path="my-events" element={<UserEventsScreen />} />
