@@ -1,6 +1,7 @@
 // import { WebAppUser } from '@twa-dev/types';
 import {createUser} from "../services/user.js";
 import { ProfileForm } from '../components/ProfileForm';
+import { useNavigate } from "react-router-dom";
 
 // type UserProfile = {
 //     username: string;
@@ -15,11 +16,10 @@ import { ProfileForm } from '../components/ProfileForm';
 
 // type User = WebAppUser & { added_to_attachment_menu?: boolean; allows_write_to_pm?: boolean } | null
 export const RegistrationScreen = ({user}) => {
-    console.log('RegistrationScreen');
-    
-
+    const navigate = useNavigate();
     const handleSubmit = (userData) => {
       createUser({telegram_id:user.id, ...userData});
+      navigate("/events/discover");
     }
     return <ProfileForm user={user} onSubmit={handleSubmit}/>
 };
