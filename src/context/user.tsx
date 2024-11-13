@@ -8,7 +8,7 @@ type User = {
     telegram_id: string
 }
 
-export const UserContext = createContext<{ user: User | null, updateUser: (userData: User) => void } | null>(null);
+export const UserContext = createContext<{ user: User | null, updateUser: (userData: User) => void } | null>({user: null, updateUser: () => {}});
 
 export const UserProvider = ({ children }: { children: ReactNode }) => {
   const [user, setUser] = useState<User | null>(null);
