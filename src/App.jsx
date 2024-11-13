@@ -62,7 +62,7 @@ function App() {
         <HashRouter>
           <Routes>
             {/* Redirect based on first visit */}
-            <Route path="/" element={<Navigate to={isFirstVisit ? "/register" : "/events/discover"} replace />} />
+            <Route path="/" element={<Navigate to={"/events/discover"} replace />} />
             
             {/* Registration Screen */}
             <Route path="/register" element={<RegistrationScreen user={user} />} />
