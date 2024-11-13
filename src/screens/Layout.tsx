@@ -14,6 +14,8 @@ export const Layout = ({isFirstVisit}:{isFirstVisit: boolean}) => {
         navigate(route);
     }
     useEffect(() => {
+        console.log("isFirstVisit", isFirstVisit);
+        
         if (isFirstVisit) {
             navigate("/register");
         }
