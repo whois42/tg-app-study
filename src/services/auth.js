@@ -9,7 +9,10 @@ export async function telegramLogin(telegramData) {
     auth_date: telegramData.auth_date,
     hash: telegramData.hash,
     query_id: telegramData.query_id,
-    ...telegramData.user
+    id: telegramData.user.id,
+    username: telegramData.user.username,
+    first_name: telegramData.user.username,
+    last_name: telegramData.user.username
   }
   
   try {
