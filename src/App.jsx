@@ -1,7 +1,7 @@
 import './App.css';
 import { useLaunchParams, miniApp, useSignal } from '@telegram-apps/sdk-react';
 import { AppRoot } from '@telegram-apps/telegram-ui';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
 import WebApp from '@twa-dev/sdk';
 import { RegistrationScreen } from "./screens/Registration.jsx";
 import { CreateEventScreen } from "./screens/CreateEvent.jsx";
@@ -11,13 +11,13 @@ import { UserEventsScreen } from "./screens/UserEvents.jsx";
 import { HashRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { getSelf } from "./services/user";
 import { telegramLogin } from "./services/auth";
-import { UserProvider, useUser } from './context/user';
+import { UserProvider, UserContext } from './context/user';
 
 function App() {
   const [isFirstVisit, setIsFirstVisit] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
 
-  const userCtx = useUser();
+  const userCtx = useContext(UserContext);
   console.log(userCtx);
   
 

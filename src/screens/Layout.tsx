@@ -1,8 +1,9 @@
 import { Tabbar } from "@telegram-apps/telegram-ui";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useLocation, useNavigate, Outlet } from "react-router-dom";
-import { useEffect } from "react";
-import { useUser } from '../context/user.tsx';
+import { useEffect, useContext } from "react";
+// import { useUser } from '../context/user.tsx';
+import { UserContext } from "../context/user";
 
 export const Layout = () => {
     const tabs = [
@@ -14,16 +15,16 @@ export const Layout = () => {
     const handleTabClick = (route: string) => {
         navigate(route);
     }
-    const us = useUser();
+    const userCtx = useContext(UserContext);
     useEffect(() => {
-        console.log("layout user", us);
+        console.log("layout user", userCtx);
         
-        if (!us?.user) {
+        if (!userCtx?.user) {
             console.log("navigating to register");
             
             navigate("/register");
         }
-    }, [us, navigate]);
+    }, [userCtx, navigate]);
 
     return (
         <div>
