@@ -2,8 +2,9 @@ import { Tabbar } from "@telegram-apps/telegram-ui";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useLocation, useNavigate, Outlet } from "react-router-dom";
 import { useEffect } from "react";
+import { useUser } from '../context/user.tsx';
 
-export const Layout = ({isFirstVisit}:{isFirstVisit:boolean}) => {
+export const Layout = () => {
     const tabs = [
         {name: "Discover", route: "/discover", Icon: () => <FontAwesomeIcon icon="compass" />}, 
         {name: "Create Event", route: "/create-event", Icon: () => <FontAwesomeIcon icon="plus" />},
@@ -13,15 +14,16 @@ export const Layout = ({isFirstVisit}:{isFirstVisit:boolean}) => {
     const handleTabClick = (route: string) => {
         navigate(route);
     }
+    const us = useUser();
     useEffect(() => {
-        console.log("isFirstVisit", isFirstVisit);
+        console.log("layout user", us);
         
-        if (isFirstVisit) {
+        if (!us?.user) {
             console.log("navigating to register");
             
             navigate("/register");
         }
-    }, [isFirstVisit, navigate]);
+    }, [us, navigate]);
 
     return (
         <div>
