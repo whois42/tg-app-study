@@ -79,7 +79,7 @@ function App() {
       {isLoading ? <div>Loading</div> : (
         <HashRouter>
           <Routes>
-            <Route path="/root" element={<Root />} >
+            <Route path="/" element={<Root />} >
             <Route path="/register" element={<RegistrationScreen user={user} />} />
             <Route path="/events" element={<Layout />}>
               <Route path="discover" element={<DiscoverScreen />} />
