@@ -13,7 +13,7 @@ export const Layout = ({isFirstVisit}:{isFirstVisit: boolean}) => {
         navigate(route);
     }
     if(isFirstVisit){
-        console.log("First Visit LAyout");
+        console.log("First Visit LAyout", isFirstVisit);
         
     }
 
