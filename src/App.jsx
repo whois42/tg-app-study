@@ -30,7 +30,7 @@ function App() {
           const fetchedUser = await getSelf();
           console.log(fetchedUser);
           
-          userCtx?.updateUser(fetchedUser);
+          userCtx.updateUser(fetchedUser);
         } catch (error) {
           if (error.response && error.response.status === 404) {
             setIsFirstVisit(true);
