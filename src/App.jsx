@@ -18,7 +18,6 @@ function App() {
   const [isLoading, setIsLoading] = useState(true);
 
   const userCtx = useContext(UserContext);
-  console.log(userCtx);
   
 
   const handleTelegramLogin = async () => {
@@ -29,6 +28,8 @@ function App() {
         try {
           const fetchedUser = await getSelf();
           console.log(fetchedUser);
+          console.log(userCtx.updateUser);
+
           
           userCtx.updateUser(fetchedUser);
         } catch (error) {
