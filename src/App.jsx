@@ -46,7 +46,6 @@ function App() {
       console.log("Finally");
       setIsLoading(false);
     }
-    console.log(isFirstVisit, "isFirstVisit");
   }
   };
   
@@ -59,6 +58,7 @@ function App() {
   const lp = useLaunchParams();
   const isDark = useSignal(miniApp.isDark);
   console.log(lp, "launch params");
+  console.log(isFirstVisit, "isFirstVisit");
   
   
 
