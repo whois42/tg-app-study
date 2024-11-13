@@ -28,6 +28,8 @@ function App() {
         await telegramLogin(telegramData);
         try {
           const fetchedUser = await getSelf();
+          console.log(fetchedUser);
+          
           userCtx?.updateUser(fetchedUser);
         } catch (error) {
           if (error.response && error.response.status === 404) {
