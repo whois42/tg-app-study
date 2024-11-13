@@ -1,4 +1,4 @@
-import { createContext, useState, ReactNode, useContext } from 'react';
+import { createContext, useState, ReactNode, Dispatch, SetStateAction } from 'react';
 
 type User = {
     id: number,
@@ -6,27 +6,29 @@ type User = {
     first_name: string,
     last_name: string,
     telegram_id: string
-}
+} | null
 
-type UserContextType = {
-    user: User | null;
-    updateUser: (userData: User) => void;
-};
-const UserContext = createContext<UserContextType|null>(null); // Use appropriate types if necessary
-
-export const useUser = () => useContext(UserContext);
-
-export const UserProvider = ({ children }: { children: ReactNode }) => {
-  const [user, setUser] = useState<User | null>(null);
-
-  // Define updateUser explicitly with a parameter
-  const updateUser = (userData: User) => {  // Replace `any` with the appropriate type if available
-    setUser(userData);
+// Define the context value type
+interface UserContextType {
+    user: User;
+    setUser: Dispatch<SetStateAction<User>>;
+  }
+  
+  // Create the UserContext with a default value of `null` for the initial state
+  export const UserContext = createContext<UserContextType | undefined>(undefined);
+  
+  // Props for UserProvider
+  interface UserProviderProps {
+    children: ReactNode;
+  }
+  
+  // Create the UserProvider
+  export const UserProvider = ({ children }: UserProviderProps) => {
+    const [user, setUser] = useState<User>(null);
+  
+    return (
+      <UserContext.Provider value={{ user, setUser }}>
+        {children}
+      </UserContext.Provider>
+    );
   };
-
-  return (
-    <UserContext.Provider value={{ user, updateUser }}>
-      {children}
-    </UserContext.Provider>
-  );
-};
