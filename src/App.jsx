@@ -76,14 +76,13 @@ function App() {
       {isLoading ? <div>Loading</div> : (
         <HashRouter>
           <Routes>
-            <Route path="/" element={<Navigate to="events/discover"/>} >
             <Route path="/register" element={<RegistrationScreen user={user} />} />
             <Route path="/events" element={<Layout />}>
               <Route path="discover" element={<DiscoverScreen />} />
               <Route path="create-event" element={<CreateEventScreen />} />
               <Route path="my-events" element={<UserEventsScreen />} />
             </Route>
-            </Route>
+            <Route path="*" element={<Navigate to="/events/discover" />} />
           </Routes>
         </HashRouter>
       )}
