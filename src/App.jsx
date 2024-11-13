@@ -11,7 +11,7 @@ import { UserEventsScreen } from "./screens/UserEvents.jsx";
 import { HashRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { getSelf } from "./services/user";
 import { telegramLogin } from "./services/auth";
-import { UserProvider, useUser } from './context/UserContext';
+import { UserProvider, useUser } from './context/user';
 
 function App() {
   const [isFirstVisit, setIsFirstVisit] = useState(false);

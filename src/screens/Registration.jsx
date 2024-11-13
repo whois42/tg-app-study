@@ -2,6 +2,8 @@
 import {createUser} from "../services/user.js";
 import { ProfileForm } from '../components/ProfileForm';
 import { useNavigate } from "react-router-dom";
+import {useState, useEffect} from "react";
+import WebApp from '@twa-dev/sdk';
 
 // type UserProfile = {
 //     username: string;
@@ -15,7 +17,15 @@ import { useNavigate } from "react-router-dom";
 // }
 
 // type User = WebAppUser & { added_to_attachment_menu?: boolean; allows_write_to_pm?: boolean } | null
-export const RegistrationScreen = ({user}) => {
+export const RegistrationScreen = () => {
+    const [user, setUser] = useState(null);
+
+    useEffect(() => {
+        const telegramData = WebApp.initDataUnsafe || {};
+        setUser(telegramData.user);
+    }, []);
+
+
     const navigate = useNavigate();
     const handleSubmit = (userData) => {
       createUser({telegram_id:user.id, ...userData});
