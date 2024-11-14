@@ -28,6 +28,8 @@ export const LocationPicker: React.FC<LocationPickerProps> = ({ onLocationSelect
     const [selectedLocation, setSelectedLocation] = useState<Location | null>(null);
 
     const onMapClick = useCallback((event: google.maps.MapMouseEvent) => {
+        console.log('event', event);
+        
         const location = {
             lat: event.latLng?.lat() || 0,
             lng: event.latLng?.lng() || 0,
