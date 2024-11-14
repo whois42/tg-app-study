@@ -16,10 +16,10 @@ const containerStyle = {
     height: '400px'
 };
 
-// const center = {
-//     lat: 52.3676, // Amsterdam coordinates
-//     lng: 4.9041
-// };
+const center = {
+    lat: 52.3676, // Amsterdam coordinates
+    lng: 4.9041
+};
 
 export const LocationPicker: React.FC<LocationPickerProps> = ({ onLocationSelect }) => {
     const { isLoaded } = useJsApiLoader({
@@ -42,6 +42,7 @@ export const LocationPicker: React.FC<LocationPickerProps> = ({ onLocationSelect
         <GoogleMap
             mapContainerStyle={containerStyle}
             zoom={10}
+            center={center}
             onClick={onMapClick}
         >
             {selectedLocation && <Marker position={selectedLocation} />}
