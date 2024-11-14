@@ -61,6 +61,8 @@ function App() {
 
   const lp = useLaunchParams();
   const isDark = useSignal(miniApp.isDark);
+  console.log('LP', lp);
+  
 
   return (
     <AppRoot
