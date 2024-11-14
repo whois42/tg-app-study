@@ -4,15 +4,15 @@ const BASE_URL = 'https://3859-87-212-202-77.ngrok-free.app';
 
 // Initialize Telegram Login
 export async function telegramLogin(telegramData) {
-  console.log(typeof telegramData.auth_date)
+  console.log(telegramData)
   const data = {
     auth_date: telegramData.auth_date,
     hash: telegramData.hash,
     query_id: telegramData.query_id,
     id: telegramData.user.id,
     username: telegramData.user.username,
-    first_name: telegramData.user.username,
-    last_name: telegramData.user.username
+    first_name: telegramData.user.first_name,
+    last_name: telegramData.user.last_name
   }
   
   try {
