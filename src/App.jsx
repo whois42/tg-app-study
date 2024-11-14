@@ -13,7 +13,6 @@ import { HashRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { getSelf } from "./services/user";
 import { telegramLogin } from "./services/auth";
 import { UserProvider, UserContext } from './context/user';
-import { is } from 'date-fns/locale';
 
 function App() {
   const [isFirstVisit, setIsFirstVisit] = useState(false);
@@ -71,15 +70,15 @@ function App() {
       ) : (
         <HashRouter>
           <Routes>
-            <Route path="/" element={isFirstVisit? <Navigate to="/register" /> : <Navigate to="/events/discover" />} />
+            <Route path="/" element={<Navigate to="/events/discover" />} />
             <Route path="/events" element={<Layout />}>
               <Route path="discover" element={<DiscoverScreen />} />
               <Route path="create-event" element={<CreateEventScreen />} />
               <Route path="my-events" element={<UserEventsScreen />} />
-              {/* <Route path="*" element={<Navigate to="discover" />} /> */}
+              <Route path="*" element={<Navigate to="discover" />} />
             </Route>
             <Route path="/register" element={<RegistrationScreen />} />
-            {/* <Route path="*" element={<Navigate to="/" />} /> */}
+            <Route path="*" element={<Navigate to="/" />} />
           </Routes>
         </HashRouter>
       )}
