@@ -3,7 +3,7 @@ import { useLaunchParams, miniApp, useSignal } from '@telegram-apps/sdk-react';
 import { AppRoot } from '@telegram-apps/telegram-ui';
 import { useEffect, useState, useContext } from 'react';
 import WebApp from '@twa-dev/sdk';
-// import { RegistrationScreen } from "./screens/Registration";
+import { RegistrationScreen } from "./screens/Registration";
 import { CreateEventScreen } from "./screens/CreateEvent";
 import { Layout } from "./screens/Layout";
 import { DiscoverScreen } from "./screens/Discover";
@@ -77,7 +77,7 @@ function App() {
               <Route path="my-events" element={<UserEventsScreen />} />
               <Route path="*" element={<Navigate to="discover" />} />
             </Route>
-            {/* <Route path="/register" element={<RegistrationScreen />} /> */}
+            <Route path="/register" element={<RegistrationScreen />} />
             <Route path="*" element={<Navigate to="/" />} />
           </Routes>
         </HashRouter>
