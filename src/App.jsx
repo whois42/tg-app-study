@@ -53,6 +53,8 @@ function App() {
   useEffect(() => {
     WebApp.ready();
     handleTelegramLogin();
+    console.log(isFirstVisit);
+    
   }, []);
 
   const lp = useLaunchParams();
