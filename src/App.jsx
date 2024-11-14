@@ -73,7 +73,7 @@ function App() {
       ) : (
         <HashRouter>
           <Routes>
-            <Route path="/" element={<Navigate to="/events/discover" />} />
+            <Route path="/"/>
             <Route path="/events" element={<Layout />}>
               <Route path="discover" element={<DiscoverScreen />} />
               <Route path="create-event" element={<CreateEventScreen />} />
