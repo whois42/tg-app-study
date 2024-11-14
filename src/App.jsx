@@ -55,7 +55,6 @@ function App() {
   useEffect(() => {
     WebApp.ready();
     handleTelegramLogin();
-    console.log(isFirstVisit);
     
   }, []);
 
@@ -79,7 +78,7 @@ function App() {
               <Route path="discover" element={<DiscoverScreen />} />
               <Route path="create-event" element={<CreateEventScreen />} />
               <Route path="my-events" element={<UserEventsScreen />} />
-              <Route path="*" element={<Navigate to="discover" />} />
+              {/* <Route path="*" element={<Navigate to="discover" />} /> */}
             </Route>
             <Route path="/register" element={<RegistrationScreen />} />
             <Route path="*" element={<Navigate to="/" />} />
