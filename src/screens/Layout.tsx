@@ -7,9 +7,9 @@ import { UserContext } from "../context/user";
 
 export const Layout = () => {
     const tabs = [
-        {name: "Discover", route: "/discover", Icon: () => <FontAwesomeIcon icon="compass" />}, 
-        {name: "Create Event", route: "/create-event", Icon: () => <FontAwesomeIcon icon="plus" />},
-        {name: "My Events", route: "/my-events", Icon: () => <FontAwesomeIcon icon="user" />}]
+        {name: "Discover", route: "/events/discover", Icon: () => <FontAwesomeIcon icon="compass" />}, 
+        {name: "Create Event", route: "/events/create-event", Icon: () => <FontAwesomeIcon icon="plus" />},
+        {name: "My Events", route: "/events/my-events", Icon: () => <FontAwesomeIcon icon="user" />}]
     const location = useLocation();
     const navigate = useNavigate();
     const handleTabClick = (route: string) => {
