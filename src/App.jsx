@@ -24,6 +24,8 @@ function App() {
     if (telegramData.user) {
       setUser(telegramData.user); // Set user in context
       try {
+        console.log("Logging in with Telegram data:", telegramData);
+        
         await telegramLogin(telegramData);
 
         // Reload events after login
