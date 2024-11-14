@@ -12,7 +12,7 @@ type Event = {
     timezone: string;
     coverImageUrl?: string;
     latitude?: number;
-    langitude?: number;
+    longitude?: number;
 }
 type EventFormProps = {
     event?: Event | null;
@@ -39,7 +39,7 @@ export const EventForm = ({event, onSubmit}:EventFormProps) => {
             end_time: new Date(endTime).toISOString(),
             timezone: "Europe/Amsterdam",
             latitude: location?.lat,
-            langitude: location?.lng
+            longitude: location?.lng
         })
     }
 
