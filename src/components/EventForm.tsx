@@ -1,6 +1,7 @@
 import { Input, Textarea} from '@telegram-apps/telegram-ui';
 import { MainButton } from '@twa-dev/sdk/react';
 import { useState } from 'react';
+import { LocationPicker } from './LocationPicker';
 
 
 type Event = {
@@ -10,6 +11,8 @@ type Event = {
     end_time : string;
     timezone: string;
     coverImageUrl?: string;
+    latitude?: number;
+    langitude?: number;
 }
 type EventFormProps = {
     event?: Event | null;
@@ -23,23 +26,20 @@ export const EventForm = ({event, onSubmit}:EventFormProps) => {
     const [startTime, setStartTime] = useState("");
     const [endTime, setEndTime] = useState("");
     const [description, setDescription] = useState(event?.description || "");
-
+    const [location, setLocation] = useState<{ lat: number; lng: number } | null>(null);
+    const handleLocationSelect = (location: { lat: number; lng: number }) => {
+        setLocation(location);
+    };
     const handleSubmit = () => {
-        console.log("submitting",{
-            title,
-            coverImageUrl,
-            description,
-            start_time: new Date(startTime).toISOString(),
-            end_time: new Date(endTime).toISOString(),
-            timezone: "Europe/Amsterdam"
-        } );
         onSubmit({
             title,
             coverImageUrl,
             description,
             start_time: new Date(startTime).toISOString(),
             end_time: new Date(endTime).toISOString(),
-            timezone: "Europe/Amsterdam"
+            timezone: "Europe/Amsterdam",
+            latitude: location?.lat,
+            langitude: location?.lng
         })
     }
 
@@ -93,6 +93,7 @@ export const EventForm = ({event, onSubmit}:EventFormProps) => {
                 type='datetime-local'
                 onChange={handleEndTimeChange}
             />
+            <LocationPicker onLocationSelect={handleLocationSelect} />
             <MainButton
                 text="Submit"
                 onClick={handleSubmit}
