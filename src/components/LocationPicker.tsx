@@ -1,10 +1,12 @@
- // LocationPicker.tsx
+// LocationPicker.tsx
 import React, { useCallback, useState } from 'react';
 import { GoogleMap, useJsApiLoader, Marker, Autocomplete } from '@react-google-maps/api';
 
 type Location = {
     lat: number;
     lng: number;
+    country: string;
+    city: string;
     address: string;
 };
 
@@ -22,14 +24,34 @@ const center = {
     lng: 4.9041,
 };
 
-export const LocationPicker: React.FC<LocationPickerProps> = ({ onLocationSelect }) => {
+const LocationPicker: React.FC<LocationPickerProps> = ({ onLocationSelect }) => {
     const { isLoaded } = useJsApiLoader({
-        googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY ||  'AIzaSyBgUJ3ReiZ3yaklCqAxUObuZk3MfwOThns', // Ensure your .env file has the correct key
+        googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY || '', // Ensure your .env file has the correct key
         libraries: ['places'],
     });
 
     const [autocomplete, setAutocomplete] = useState<google.maps.places.Autocomplete | null>(null);
     const [selectedLocation, setSelectedLocation] = useState<{ lat: number; lng: number } | null>(null);
+
+    const extractAddressComponents = (components: google.maps.GeocoderAddressComponent[]) => {
+        let country = '';
+        let city = '';
+        let address = '';
+
+        components.forEach((component) => {
+            if (component.types.includes('country')) {
+                country = component.long_name;
+            } else if (component.types.includes('locality') || component.types.includes('administrative_area_level_1')) {
+                city = component.long_name;
+            } else if (component.types.includes('route') || component.types.includes('street_address')) {
+                address += component.long_name + ' ';
+            } else if (component.types.includes('street_number')) {
+                address = component.long_name + ' ' + address;
+            }
+        });
+
+        return { country, city, address: address.trim() };
+    };
 
     const onLoad = (autocompleteInstance: google.maps.places.Autocomplete) => {
         setAutocomplete(autocompleteInstance);
@@ -38,14 +60,18 @@ export const LocationPicker: React.FC<LocationPickerProps> = ({ onLocationSelect
     const onPlaceChanged = () => {
         if (autocomplete) {
             const place = autocomplete.getPlace();
-            console.log('place', place);
-            
-            if (place.geometry) {
+            if (place.geometry && place.address_components) {
+                const { lat, lng } = place.geometry.location!;
+                const { country, city, address } = extractAddressComponents(place.address_components);
+
                 const location = {
-                    lat: place.geometry.location?.lat() || 0,
-                    lng: place.geometry.location?.lng() || 0,
-                    address: place.formatted_address || '',
+                    lat: lat(),
+                    lng: lng(),
+                    country,
+                    city,
+                    address,
                 };
+
                 setSelectedLocation(location);
                 onLocationSelect(location);
             }
@@ -55,17 +81,20 @@ export const LocationPicker: React.FC<LocationPickerProps> = ({ onLocationSelect
     const onMapClick = useCallback(
         async (event: google.maps.MapMouseEvent) => {
             if (!event.latLng) return;
+
             const lat = event.latLng.lat();
             const lng = event.latLng.lng();
             const geocoder = new google.maps.Geocoder();
 
-            // Reverse geocode to get address
             const response = await geocoder.geocode({ location: { lat, lng } });
-            const address = response.results[0]?.formatted_address || 'Unknown address';
+            const result = response.results[0];
+            if (result) {
+                const { country, city, address } = extractAddressComponents(result.address_components);
 
-            const location = { lat, lng, address };
-            setSelectedLocation(location);
-            onLocationSelect(location);
+                const location = { lat, lng, country, city, address };
+                setSelectedLocation(location);
+                onLocationSelect(location);
+            }
         },
         [onLocationSelect]
     );
@@ -92,3 +121,5 @@ export const LocationPicker: React.FC<LocationPickerProps> = ({ onLocationSelect
         </div>
     );
 };
+
+export default LocationPicker;
